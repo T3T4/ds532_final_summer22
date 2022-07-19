@@ -1,0 +1,25 @@
+<!--<h3>{{numrows}} Records Found</h3>-->
+<table class="table table-striped custab">
+  <thead>
+    <tr>
+      <th>Accounts</th>
+      <th>TikTok_Rank</th>
+      <th>Comments_Average</th>
+      <th>Likes_Average</th>
+      <th>Shares_Average</th>
+      <th>Subscribers_Count</th>
+      <th>Views_Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in tiktok %}
+  <tr>
+    <td>{{row.Accounts}}</td>
+    <td>{{row.TikTok_Rank}}</td>
+    <td>{{row.Comments_Average}}</td>
+    <td>{{row.Likes_Average}}</td>
+    <td>{{row.Shares_Average}}</td>
+    <td>{{row.Subscribers_Count}}</td>
+    <td>{{row.Views_Rank}}</td>
+  </tr>
+ {% endfor %}

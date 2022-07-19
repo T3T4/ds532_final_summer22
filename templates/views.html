@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Average Views of Tiktok Influencers</title>
+  <script src="../static/js/bootstrap.js"></script>
+  <script src="../static/js/jquery-3.2.1.min.js"></script>
+       <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel ="stylesheet">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+</head>
+<body>
+{% block body %}
+
+<div class="container" >
+    <div class="well text-center"  id="jane-header-view">
+        <h1>Average Views Ranking Table</h1>
+<h2>  <a href="/form5" class ="btn btn-warning btn-xs" >Add New Record</a></h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h2>Views Data</h2>
+
+            <table class="table table-stripped">
+                <tr>
+                    <th>Accounts</th>
+                    <th>TikTok_Rank</th>
+                    <th>Average Views</th>
+                    <th>Views Ranking</th>
+                </tr>
+                {% for row in views%}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+
+
+
+                </tr>
+{%endfor %}
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+</body>
+</html>

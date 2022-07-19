@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments_Count_Average</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+
+</head>
+<body>
+<h1 align="center"> Average Comments for Tiktok Influencers </h1>
+<form action="/login3" method = "POST">
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+        <h2><small id="emailHelp" class="form-text text-muted">Please Enter Tiktok Account </small></h2>
+    <label for="Accounts">TikTok Account</label>
+   <input type = "text" class="form-control-lg" name = "Accounts" />
+
+        </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+        <h2><small id="emailHelp" class="form-text text-muted">Please Enter Average Comments Count </small></h2>
+    <label for="Comments_avg">Number of Average Comments </label>
+    <input type = "integer" class="form-control-lg"  name = "Comments_avg" />
+          </div>
+  </div>
+    <div class="form-row">
+    <div class="col-md-4 mb-3">
+<h2><small id="emailHelp" class="form-text text-muted">Click "Submit!" </small></h2>
+  <button type="submit" class="btn btn-primary">Submit</button>
+    </div></div>
+</form>
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h2>New Average Comments Data</h2>
+
+            <table class="table table-stripped">
+                <tr>
+                    <th>Accounts</th>
+                    <th>Comments_avg</th>
+
+                </tr>
+                {% for row in newcomments%}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+<!--                    <td>{{row.2}}</td>-->
+<!--                    <td>{{row.3}}</td>-->
+
+                </tr>
+{%endfor %}
+            </table>
+</body>
+</html>

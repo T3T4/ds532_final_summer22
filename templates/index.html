@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+<script>
+$(document).ready(function(){
+    load_data();
+    function load_data(query)
+    {
+            $.ajax({
+            url:"/ajaxlivesearch",
+            method:"POST",
+            data:{query:query},
+            success:function(data)
+            {
+                $('#result').html(data);
+                $("#result").append(data.htmlresponse);
+            }
+        });
+    $('#search_text').keyup(function(){
+        var search = $(this).val();
+        if (search != ''){
+            load_data(search);
+            }else{
+                load_data();
+            }
+
+    });
+
+});
+</script>
+
+</head>
+<body>
+<html>
+<head>
+    <title>CRUD Application</title>
+    <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel ="stylesheet">
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+{% block body %}
+
+<div class="container">
+    <div class="well text-center" id="jane-header-index">
+        <h1>Python Flask CRUD Web Application</h1>
+<h3>DS532 Final Project by Simi, Eric, Jane</h3>
+</div>
+<!--<div class ="container search-table">-->
+<!--<p><h2 align ="center">Search</h2></p>-->
+<!--<div class="search-box">-->
+<!--        <div class="row">-->
+<!--            <div class ="col-md-3">-->
+<!--                <h5>Search All Fields</h5>-->
+<!--            </div>-->
+<!--            <div class ="col-md-9">-->
+<!--                <input type="text" name="search_text" id="search_text" class="form-control" placeholder="Search all fields e.g. HTML">-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="result"></div>-->
+<!--</div>-->
+
+    <div class="form-row">
+    <div class="col-md-4 mb-3"><form action="{{ url_for('search')}}" method="post">
+        <h5>Enter Account to Search</h5>
+  <input type="text" id="Accounts" name="search" ><br><br>
+  <input type="submit" value="Submit">
+ </form>   </div></div>
+
+
+<style>
+    .search-table{
+    padding:10%,
+    margin-top:-6%,
+    }
+    .search-box{
+    background:#c1c1c1;
+    border: 1px solid #ababab;
+    padding :3%
+   }
+   .search-box input:focus{
+    box-shadow:none;
+    border: 2px solid #eeeeee;
+   }
+   .search-list {
+    background:#fff;
+    border: 1px solid #ababab;
+    border-top:none;
+   }
+   .search-list h3{
+    background:#eee;
+    padding:3%;color:#fe6f41;
+    margin-bottom:0%;
+   }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h2>Top TikTok Influencers <!--<button type ="button" class ="btn btn-success pull-right" data-toggle="modal" data-target="#mymodal" >
+                Search </button>   --></h2> <h4><a href="{{ url_for('visualization') }}" style="color:#bfc934"> <u>Visualized Results </u></a></h4>
+
+
+<!-- flash-->
+                {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+    </div>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+        <table class="table table-stripped">
+                <tr>
+                    <th>Accounts</th>
+                    <th>TikTok_Rank</th>
+                    <th><a href="{{ url_for('comments') }}">Comments_Average</a></th>
+                    <th><a href="{{ url_for('likes') }}">Likes_Average</a></th>
+                    <th><a href="{{ url_for('shares') }}">Shares_Average</a></th>
+                    <th> <a href="{{ url_for('subscribers') }}">Subscribers_Count</a></th>
+                    <th><a href="{{ url_for('views') }}"> Views_Rank </a> </th>
+                </tr>
+                {% for row in records%}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                    <td>{{row.4}}</td>
+                    <td>{{row.5}}</td>
+                    <td>{{row.6}}</td>
+                </tr>
+        </table>
+            {% endfor  %}
+            <!--end of flash-->
+
+            <!--<table class="table table-stripped">
+                <tr>
+                    <th>Accounts</th>
+                    <th>TikTok_Rank</th>
+                    <th><a href="{{ url_for('comments') }}">Comments_Average</a></th>
+                    <th><a href="{{ url_for('likes') }}">Likes_Average</a></th>
+                    <th><a href="{{ url_for('shares') }}">Shares_Average</a></th>
+                    <th> <a href="{{ url_for('subscribers') }}">Subscribers_Count</a></th>
+                    <th><a href="{{ url_for('views') }}"> Views_Rank </a> </th>
+                </tr>-->
+                {% for row in tiktok_influencer%}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                    <td>{{row.4}}</td>
+                    <td>{{row.5}}</td>
+                    <td>{{row.6}}</td>
+
+                    <td>
+                        <a href="/update/{{row.0}}" class ="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Update</a>
+                        <a href="/delete/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                    </td>
+                </tr>
+  <!-- below is the update section-->
+<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+   <div class="modal-dialog">
+
+      <div class="modal-content">
+
+         <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <h4 class="modal-title">Update Information</h4>
+         </div>
+
+         <div class="modal-body">
+
+            <form action="{{ url_for('update') }}" method="POST">
+
+               <div class="form-group">
+
+                  <label>Account</label>
+                   <input type="hidden"  name="Accounts" value="{{row.0}}">
+                  <input type="text" class="form-control" name="name" value="{{row.0}}">
+
+               </div>
+
+               <div class="form-group">
+                  <label>Comments_avg</label>
+
+                  <input type="text" class="form-control" name="Comments_avg" value="{{row.2}}">
+
+               </div>
+
+               <div class="form-group">
+                  <label>Likes_avg</label>
+
+                  <input type="text" class="form-control" name="Likes_avg" value="{{row.3}}">
+
+               </div>
+
+                 <div class="form-group">
+                  <label>Shares_avg</label>
+
+                  <input type="text" class="form-control" name="Shares_avg" value="{{row.4}}">
+
+               </div>
+                <div class="form-group">
+                  <label>Subscribers_count</label>
+
+                  <input type="text" class="form-control" name="Subscribers_count" value="{{row.5}}">
+
+               </div>
+
+                <div class="form-group">
+                  <label>Views_avg</label>
+
+                  <input type="text" class="form-control" name="Views_avg" value="{{row.6}}">
+
+               </div>
+               <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Update</button>
+               </div>
+            </form>
+
+         </div>
+
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+                {% endfor  %}
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+
+</body>
+</html>

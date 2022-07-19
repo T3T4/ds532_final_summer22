@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.navbar-default {
+  background-color: #1e633b;
+  border-color: #1e633b;
+}
+.navbar-default .navbar-brand {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-text {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu {
+  background-color: #1e633b;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+  color: #f6f7f4;
+  background-color: #1e633b;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li.divider {
+  background-color: #1e633b;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  color: #f6f7f4;
+  background-color: #1e633b;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #f6f7f4;
+  background-color: #1e633b;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #f6f7f4;
+  background-color: #1e633b;
+}
+.navbar-default .navbar-toggle {
+  border-color: #1e633b;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #1e633b;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f6f7f4;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f6f7f4;
+}
+.navbar-default .navbar-link {
+  color: #f6f7f4;
+}
+.navbar-default .navbar-link:hover {
+	color: #A4E621;
+}
+.navbar-brand   {
+	background-image: url(../../../week%208/navigationexercise/images/yoda1.svg);
+	background-repeat: no-repeat;
+	padding-left: 51px;
+}
+.navbar-brand:hover {
+	font-size: 150%;
+}
+.nav.navbar-nav li a:hover {
+	font-size: 150%;
+}
+
+@media (max-width: 767px) {
+}

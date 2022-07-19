@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscribers</title>
+  <script src="../static/js/bootstrap.js"></script>
+  <script src="../static/js/jquery-3.2.1.min.js"></script>
+       <link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel ="stylesheet">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+</head>
+<body>
+#{% extends "index.html" %}
+#{% block content %}
+
+
+<form action="{{ url_for('search')}}" method="post">
+<!--  <label for="fname">First name:</label><br>-->
+<!--  <input type="text" id="fname" name="fname" value="John"><br>-->
+<!--  <label for="lname">Last name:</label><br>-->
+  <input type="text" id="Accounts" name="Accounts" ><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<!--<div class="search">-->
+<!--<form action="/search" method=post>-->
+<!--    <input type=text name=search value="{{ request.form.search}}"></br>-->
+<!--    <div class="actions"><input type=submit value="Search"></div>-->
+<!--</form>-->
+<!--</div>-->
+{% for message in get_flashed_messages() %}
+<!--<div class=flash>-->
+<!--    {{ message }}-->
+<!--</div>-->
+<!--{% endfor %}-->
+<!--{% endblock %}-->
+</body>
+</html>
+<body>
+
+</body>
+</html>
