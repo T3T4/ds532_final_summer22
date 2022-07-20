@@ -1,20 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-from flask_mysqldb import MySQL, MySQLdb
+
 import mysql.connector
 
 
 app = Flask(__name__)
-#db = yaml.load(open('db.yaml'))
+app.config['mysql_database_URI']='postgres://ldwcpgickubcon:3fd586fca0bb508617d2e821add25436d569ac6c390544d5eeba92676881f41a@ec2-54-152-28-9.compute-1.amazonaws.com:5432/d116m5lt956bdo
+''
 mysql = mysql.connector.connect(
     host='localhost',
     user='root',
     password='',
-    port='3307',
+    port='8889',
     database='finalproject'
 )
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     #return render_template('index.html')
     mycursor = mysql.cursor()
@@ -44,14 +44,17 @@ def ajaxlivesearch():
 
 
 #search records
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == "POST":
-        cursor = mysql.cursor()
-        cursor.executemany('''select * from total_number where name = Accounts=%s''', request.form['search'])
-        return render_template("results.html", records=cursor.fetchall())
-        mysql.commit()
-    return render_template('search.html')
+        search = request.form['search']
+        search=str(search).lower()
+        c = mysql.cursor()
+        query = c.execute('''select * from total_number where Accounts LIKE CONCAT('%%', (%s), '%%')''', (search,))
+        #print(query)
+        return render_template('index.html', records=c.fetchall())
+    return render_template('index.html')
 
 
 # update records in index.html
@@ -102,8 +105,12 @@ def login():
         cursor = mysql.cursor()
         cursor.execute('''INSERT INTO New_Tiktok_Subscribers VALUES(%s,%s)''', (Accounts, Subscribers_count))
         mysql.commit()
+        #cursor.close()
+        # return f"Thank you!!"
+        cursor.execute('select * from new_tiktok_subscribers')
+        return render_template('form.html', newsubs=cursor.fetchall())
         cursor.close()
-        return f"Thank you!!"
+        return render_template('form.html')
 
 #New Page 2 on Shares
 @app.route('/shares')
@@ -129,8 +136,12 @@ def login2():
         cursor = mysql.cursor()
         cursor.execute('''INSERT INTO New_Tiktok_Shares VALUES(%s,%s)''', (Accounts, Shares_avg))
         mysql.commit()
+        #cursor.close()
+        #return f"Thank you!!"
+        cursor.execute('select * from new_tiktok_shares')
+        return render_template('form2.html', newshares=cursor.fetchall())
         cursor.close()
-        return f"Thank you!!"
+        return render_template('form2.html')
 
 #New Page 3 on Comments
 @app.route('/comments')
@@ -156,8 +167,12 @@ def login3():
         cursor = mysql.cursor()
         cursor.execute('''INSERT INTO New_Tiktok_Comments VALUES(%s,%s)''', (Accounts, Comments_avg))
         mysql.commit()
+        cursor.execute('select * from new_tiktok_comments')
+        return render_template('form3.html', newcomments=cursor.fetchall())
+        #cursor.close()
+        return render_template('form3.html')
         cursor.close()
-        return f"Thank you!!"
+        #return f"Thank you!!"
 
 #New Page 4 on Likes
 @app.route('/likes')
@@ -183,8 +198,12 @@ def login4():
         cursor = mysql.cursor()
         cursor.execute('''INSERT INTO New_Tiktok_Likes VALUES(%s,%s)''', (Accounts, Likes_avg))
         mysql.commit()
+        cursor.execute('select * from new_tiktok_likes')
+        return render_template('form4.html', newlikes=cursor.fetchall())
+        # cursor.close()
+        return render_template('form4.html')
         cursor.close()
-        return f"Thank you!!"
+        #return f"Thank you!!"
 
 
 #New Page 5 on Views
@@ -211,9 +230,16 @@ def login5():
         cursor = mysql.cursor()
         cursor.execute('''INSERT INTO New_Tiktok_Views VALUES(%s,%s)''', (Accounts, Views_avg))
         mysql.commit()
+        cursor.execute('select * from new_tiktok_views')
+        return render_template('form5.html', newviews=cursor.fetchall())
+        # cursor.close()
+        return render_template('form5.html')
         cursor.close()
-        return f"Thank you!!"
+        #return f"Thank you!!"
 
+@app.route("/Visualization")
+def visualization():
+    return render_template("Visualization.html")
 #end of adding routes
 
 if __name__ == "__main__":
